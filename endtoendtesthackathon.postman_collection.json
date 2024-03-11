@@ -1,0 +1,398 @@
+{
+	"info": {
+		"_postman_id": "2602dd82-e23a-4ede-b9fa-70518808da78",
+		"name": "endtoendtesthackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33530449",
+		"_collection_link": "https://crimson-zodiac-929406.postman.co/workspace/dd45fd30-7be3-4f35-a820-6232d5df4dfe/collection/32818126-2602dd82-e23a-4ede-b9fa-70518808da78?action=share&source=collection_link&creator=33530449"
+	},
+	"item": [
+		{
+			"name": "userlogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const{token}=JSON.parse(responseBody);\r",
+							"\r",
+							"    \r",
+							"    pm.collectionVariables.set(\"token\", token);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"password\": \"Numpyninja@1\",\r\n  \"userLoginEmailId\": \"sdetorganizers@gmail.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/login",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "valid url",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"validate post status code\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"const{batchName}=JSON.parse(responseBody);\r",
+							"    \r",
+							"    pm.collectionVariables.set(\"batchName\", batchName);\r",
+							"    const{batchId}=JSON.parse(responseBody);\r",
+							"    \r",
+							"    pm.collectionVariables.set(\"batchId\", batchId);\r",
+							"    const{batchDescription}=JSON.parse(responseBody);\r",
+							"    \r",
+							"    pm.collectionVariables.set(\"batchDescription\", batchDescription);\r",
+							"    const{batchStatus}=JSON.parse(responseBody);\r",
+							"    \r",
+							"    pm.collectionVariables.set(\"batchStatus\", batchStatus);\r",
+							"        const{batchNoOfClasses}=JSON.parse(responseBody);\r",
+							"    \r",
+							"    pm.collectionVariables.set(\"batchNoOfClasses\", batchNoOfClasses);\r",
+							"    const{programId}=JSON.parse(responseBody);\r",
+							"    \r",
+							"    pm.collectionVariables.set(\"programId\", programId);\r",
+							"        const{programName}=JSON.parse(responseBody);\r",
+							"    \r",
+							"    pm.collectionVariables.set(\"programName\", programName);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"batchDescription\": \"Hackathon\",\r\n    \"batchName\": \"API15zila\",\r\n    \"batchNoOfClasses\": 5,\r\n    \"batchStatus\": \"active\",\r\n    \"programId\": 16220\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/batches",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"batches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validurl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"validate get status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "{{baseurl}}/batches",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"batches"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "batchnamevalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"validate get status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "{{baseurl}}/batches/batchName/{{batchName}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"batches",
+						"batchName",
+						"{{batchName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatevalid Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"validate put status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"batchDescription\": \"{{batchDescription}}\",\r\n  \"batchId\":{{batchId}},\r\n  \"batchName\": \"{{batchName}}\",\r\n  \"batchNoOfClasses\":{{batchNoOfClasses}},\r\n  \"batchStatus\": \"{{batchStatus}}\",\r\n  \"programId\":{{programId}}\r\n }\r\n"
+				},
+				"url": {
+					"raw": "{{baseurl}}/batches/{{batchId}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"batches",
+						"{{batchId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validbatchid Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"validate delete status code\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"batchDescription\": \"da bat100\",\r\n  \"batchId\":8637,\r\n  \"batchName\": \"dasdet\",\r\n  \"batchNoOfClasses\": 5,\r\n  \"batchStatus\": \"active\",\r\n  \"programId\": 16220\r\n }\r\n"
+				},
+				"url": {
+					"raw": "{{baseurl}}/batches/{{batchId}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"batches",
+						"{{batchId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "https://lms-marchapi-hackathon-a258d2bbd43b.herokuapp.com/lms"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "batchName",
+			"value": ""
+		},
+		{
+			"key": "batchId",
+			"value": ""
+		},
+		{
+			"key": "batchDescription",
+			"value": ""
+		},
+		{
+			"key": "batchStatus",
+			"value": ""
+		},
+		{
+			"key": "batchNoOfClasses",
+			"value": ""
+		},
+		{
+			"key": "programId",
+			"value": ""
+		},
+		{
+			"key": "programName",
+			"value": ""
+		},
+		{
+			"key": "pwd",
+			"value": "Numpyninja@1"
+		},
+		{
+			"key": "userlogin",
+			"value": "sdetorganizers@gmail.com"
+		}
+	]
+}
