@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "bb6f9e3a-b78a-4f8e-9e29-7bd8e68a456f",
+		"name": "Team15 APIzilla",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33537109",
+		"_collection_link": "https://martian-eclipse-843837.postman.co/workspace/9793523c-4925-452f-bd26-8fc64e914372/collection/33242028-bb6f9e3a-b78a-4f8e-9e29-7bd8e68a456f?action=share&source=collection_link&creator=33537109"
+	},
+	"item": [
+		{
+			"name": "Batch Module End to End Testing & Chaining",
+			"item": [
+				{
+					"name": "Userlogin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"User mailId and Password is valid\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Token value display\",()=>{",
+									"    var tokenvalue=pm.response.json();",
+									" ",
+									"console.log(tokenvalue.token);",
+									"",
+									"    pm.globals.set(\"lmstokenv\", tokenvalue.token);",
+									"   ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"{{password}}\",\n  \"userLoginEmailId\": \"{{loginId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lmsurl}}/lms/login/",
+							"host": [
+								"{{lmsurl}}"
+							],
+							"path": [
+								"lms",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Batches",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Batches are created and Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"var batchid=pm.response.json();",
+									"pm.globals.set(\"Batchid\", batchid.batchId);",
+									"console.log(batchid.batchId)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{lmstokenv}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"batchName\": \" API Postman TEAM API PGORGRAM4\",\n     \"batchId\": 0,\n    \"batchDescription\": \"Testing & Analytics\",\n    \"batchStatus\": \"active\",\n    \"batchNoOfClasses\": 2,\n    \"programId\": 16380,\n    \"programName\": \"API POSTMAN\"\n}\n  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lmsurl}}/lms/batches",
+							"host": [
+								"{{lmsurl}}"
+							],
+							"path": [
+								"lms",
+								"batches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Batches with Batchid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\" BatchID is fetched from created Batches\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{lmstokenv}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lmsurl}}/lms/batches/batchId/{{Batchid}}",
+							"host": [
+								"{{lmsurl}}"
+							],
+							"path": [
+								"lms",
+								"batches",
+								"batchId",
+								"{{Batchid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Batch Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Batch Details are Updated\", function () {",
+									"    pm.response.to.have.status(200);",
+									"   ",
+									"});",
+									"pm.test(\"BatchID Shown Below is Updated\",()=>{",
+									" var batchid = pm.response.json();",
+									"console.log(batchid.batchId)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{lmstokenv}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"batchId\": \"{{BatchID}}\",\n    \"batchName\": \"Team 15 API-ZILLA SDET&DA March24\",\n    \"batchDescription\": \"Tester\",\n    \"batchStatus\": \"active\",\n    \"batchNoOfClasses\": 10,\n    \"programId\": \"{{Programid}}\",\n    \"programName\": \"DVLPR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lmsurl}}/lms/batches/{{BatchID}}",
+							"host": [
+								"{{lmsurl}}"
+							],
+							"path": [
+								"lms",
+								"batches",
+								"{{BatchID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Batches with BatchId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deleted Batch Details\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{lmstokenv}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{lmsurl}}/lms/batches/{{BatchID}}",
+							"host": [
+								"{{lmsurl}}"
+							],
+							"path": [
+								"lms",
+								"batches",
+								"{{BatchID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Batches",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\" List of all Batches \", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{lmstokenv}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{lmsurl}}/lms/batches",
+							"host": [
+								"{{lmsurl}}"
+							],
+							"path": [
+								"lms",
+								"batches"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Data Driven Batch Module",
+			"item": [
+				{
+					"name": "Create new Batches",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Created New Batches and Status code is 201 \", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"var batch=pm.response.json();",
+									"pm.globals.set(\"Batchid\", batch.batchId);",
+									"pm.globals.set(\"Programid\", batch.programId);",
+									"console.log(batch.batchId)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{lmstokenv}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"batchDescription\": \"{{batchDescription}}\",\n  \"batchId\": 0,\n  \"batchName\": \"{{batchName}}\",\n  \"batchNoOfClasses\":{{batchNoOfClasses}},\n  \"batchStatus\": \"{{batchStatus}}\",\n  \"programId\": {{programId}},\n  \"programName\": \"{{programName}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lmsurl}}/lms/batches",
+							"host": [
+								"{{lmsurl}}"
+							],
+							"path": [
+								"lms",
+								"batches"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "lmsurl",
+			"value": "https://lms-marchapi-hackathon-a258d2bbd43b.herokuapp.com"
+		},
+		{
+			"key": "password",
+			"value": "Numpyninja@1"
+		},
+		{
+			"key": "loginId",
+			"value": "sdetorganizers@gmail.com"
+		},
+		{
+			"key": "BatchID",
+			"value": "8609"
+		},
+		{
+			"key": "updateBatchID",
+			"value": "9000"
+		}
+	]
+}
