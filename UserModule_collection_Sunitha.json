@@ -1,0 +1,1450 @@
+{
+	"info": {
+		"_postman_id": "fa8bf437-8b3d-4a50-a579-d91c830d2c49",
+		"name": "LMS API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33537109",
+		"_collection_link": "https://martian-eclipse-843837.postman.co/workspace/9793523c-4925-452f-bd26-8fc64e914372/collection/33242028-fa8bf437-8b3d-4a50-a579-d91c830d2c49?action=share&source=collection_link&creator=33537109"
+	},
+	"item": [
+		{
+			"name": "User Sign In",
+			"item": [
+				{
+					"name": "User Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test('Set token', function () {\r",
+									"    console.log(jsonData.token);\r",
+									"    pm.globals.set(\"token\", jsonData.token);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Numpyninja@1\",\r\n  \"userLoginEmailId\": \"sdetorganizers@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All roles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/roles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Information by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "U229"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Active User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/activeUsers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"activeUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gets count of active & inactive Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/byStatus?id=all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"byStatus"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by program Batches",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/programBatch/8433",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"programBatch",
+								"8433"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User for Program",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/programs/16210",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"programs",
+								"16210"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users with Roles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/roles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by RoleID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/roles/R03",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roles",
+								"R03"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Users with Facets/Filters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v2/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v2",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Login with Role Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"EEE\",\r\n  \"userEduUg\": \"string\",\r\n  \"userFirstName\": \"Useradmin\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"Last\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Atlanta\",\r\n  \"userLogin\": {\r\n    \"loginStatus\": \"Active\",\r\n    \"password\": \"string\",\r\n    \"roleIds\": [\r\n      \"string\"\r\n    ],\r\n    \"status\": \"Active\",\r\n    \"userLoginEmail\": \"Userlogin567@gmail.com\"\r\n  },\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\": 1356110871,\r\n  \"userRoleMaps\": [\r\n    {\r\n      \"roleId\": \"R01\",\r\n      \"userRoleStatus\": \"Active\"\r\n    }\r\n  ],\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatus",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Login with Role Admin without mandatory field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"ECE\",\r\n  \"userEduUg\": \"string\",\r\n  \"userFirstName\": \"APIZilla\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"TeamFifteen\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Florida\",\r\n  \"userLogin\": {\r\n    \"loginStatus\": \"Active\",\r\n    \"password\": \"string\",\r\n    \"roleIds\": [\r\n      \"string\"\r\n    ],\r\n    \"status\": \"Active\",\r\n    \"userLoginEmail\": \"APIZilla@gmail.com\"\r\n  },\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\":3456789567,\r\n  \"userRoleMaps\": [\r\n    {\r\n      \"roleId\": \"\",\r\n      \"userRoleStatus\": \"Active\"\r\n    }\r\n  ],\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatus",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Login with Role Admin with invalid Endpoints",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 405\", function () {\r",
+									"    pm.response.to.have.status(405);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"ECE\",\r\n  \"userEduUg\": \"string\",\r\n  \"userFirstName\": \"APIZilla\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"TeamFifteen\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Florida\",\r\n  \"userLogin\": {\r\n    \"loginStatus\": \"Active\",\r\n    \"password\": \"string\",\r\n    \"roleIds\": [\r\n      \"string\"\r\n    ],\r\n    \"status\": \"Active\",\r\n    \"userLoginEmail\": \"APIZilla9@gmail.com\"\r\n  },\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\":3456789567,\r\n  \"userRoleMaps\": [\r\n    {\r\n      \"roleId\": \"R01\",\r\n      \"userRoleStatus\": \"Active\"\r\n    }\r\n  ],\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatu",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Login with Role Admin with existing email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"ECE\",\r\n  \"userEduUg\": \"string\",\r\n  \"userFirstName\": \"APIZilla\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"TeamFifteen\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Florida\",\r\n  \"userLogin\": {\r\n    \"loginStatus\": \"Active\",\r\n    \"password\": \"string\",\r\n    \"roleIds\": [\r\n      \"string\"\r\n    ],\r\n    \"status\": \"Active\",\r\n    \"userLoginEmail\": \"APIZilla@gmail.com\"\r\n  },\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\": 9879879812,\r\n  \"userRoleMaps\": [\r\n    {\r\n      \"roleId\": \"R01\",\r\n      \"userRoleStatus\": \"Active\"\r\n    }\r\n  ],\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatus",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Login with Role Admin with existing phone number",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"ECE\",\r\n  \"userEduUg\": \"string\",\r\n  \"userFirstName\": \"APIZilla\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"TeamFifteen\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Florida\",\r\n  \"userLogin\": {\r\n    \"loginStatus\": \"Active\",\r\n    \"password\": \"string\",\r\n    \"roleIds\": [\r\n      \"string\"\r\n    ],\r\n    \"status\": \"Active\",\r\n    \"userLoginEmail\": \"APIZilla@gmail.com\"\r\n  },\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\": 9879879871,\r\n  \"userRoleMaps\": [\r\n    {\r\n      \"roleId\": \"R01\",\r\n      \"userRoleStatus\": \"Active\"\r\n    }\r\n  ],\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatus",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Login with Role Staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"ECE\",\r\n  \"userEduUg\": \"string\",\r\n  \"userFirstName\": \"APIZillaUser\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"TeamFifteenuser\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Florida\",\r\n  \"userLogin\": {\r\n    \"loginStatus\": \"Active\",\r\n    \"password\": \"string\",\r\n    \"roleIds\": [\r\n      \"string\"\r\n    ],\r\n    \"status\": \"Active\",\r\n    \"userLoginEmail\": \"APIZilla16655@gmail.com\"\r\n  },\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\": 9231100172,\r\n  \"userRoleMaps\": [\r\n    {\r\n      \"roleId\": \"R02\",\r\n      \"userRoleStatus\": \"Active\"\r\n    }\r\n  ],\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatus",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User Login with Role Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"ECE\",\r\n  \"userEduUg\": \"string\",\r\n  \"userFirstName\": \"APIZillauser\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"TeamFifteenuser\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Florida\",\r\n  \"userLogin\": {\r\n    \"loginStatus\": \"Active\",\r\n    \"password\": \"string\",\r\n    \"roleIds\": [\r\n      \"string\"\r\n    ],\r\n    \"status\": \"Active\",\r\n    \"userLoginEmail\": \"APIZilla3655@gmail.com\"\r\n  },\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\": 9401279873,\r\n  \"userRoleMaps\": [\r\n    {\r\n      \"roleId\": \"R03\",\r\n      \"userRoleStatus\": \"Active\"\r\n    }\r\n  ],\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatus",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"ECE\",\r\n  \"userEduUg\": \"B.Tech\",\r\n  \"userFirstName\": \"APIZilla\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"TeamFifteen\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Florida\",\r\n  \"userLoginEmail\": \"APIZilla4@gmail.com\",\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\": 9878978967,\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "U229"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Role Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userRoleList\": [\r\n    \"R01\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleId/U229",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleId",
+								"U229"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Role Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"roleId\": \"R03\",\r\n  \"userRoleStatus\": \"Active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatus/U229",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatus",
+								"U229"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Login Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loginStatus\": \"Active\",\r\n  \"password\": \"stringpassword\",\r\n  \"roleIds\": [\r\n    \"R03\"\r\n  ],\r\n  \"status\": \"Active\",\r\n  \"userLoginEmail\": \"stringemail@gamil.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/userLogin/U229",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"userLogin",
+								"U229"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/U229",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"U229"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Data Driven",
+			"item": [
+				{
+					"name": "Create User Login with Role Admin Data Driven CSV",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"{{coments}}\",\r\n  \"userEduPg\": \"{{post_grad}}\",\r\n  \"userEduUg\": \"{{under grad}}\",\r\n  \"userFirstName\": \"{{first_name}}\",\r\n  \"userId\": \"{{user_id}}\",\r\n  \"userLastName\": \"{{last_name}}\",\r\n  \"userLinkedinUrl\": \"{{linkurl}}\",\r\n  \"userLocation\": \"{{user_location}}\",\r\n  \"userLogin\": {\r\n    \"loginStatus\": \"{{login_status}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"roleIds\": [\r\n      \"{{role_id}}\"\r\n    ],\r\n    \"status\": \"{{status}}\",\r\n    \"userLoginEmail\": \"{{login_email}}\"\r\n  },\r\n  \"userMiddleName\": \"{{middle_name}}\",\r\n  \"userPhoneNumber\": {{phone_no}},\r\n  \"userRoleMaps\": [\r\n    {\r\n      \"roleId\": \"{{role_id}}\",\r\n      \"userRoleStatus\": \"{{role_status}}\"\r\n    }\r\n  ],\r\n  \"userTimeZone\": \"{{time_zone}}\",\r\n  \"userVisaStatus\": \"{{visa_status}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatus",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatus"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "END-TO-END User",
+			"item": [
+				{
+					"name": "Create User Login with Role Admin END-TO-END",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"var response=pm.response.json();\r",
+									"console.log(response);\r",
+									"pm.collectionVariables.set(\"Userid\", response.userId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var num = Math.floor(Math.random() * 10000000000); // Generate a random number between 0 and 9999999999\r",
+									"var paddedNum = num.toString().padStart(10, '0'); // Pad the number with leading zeros if it's less than 10 digits\r",
+									"pm.globals.set(\"phone_number2\",  paddedNum); \r",
+									"//let email='user_id'+_.random(100000)+'@gmail.com'\r",
+									"let email='user_id'+num+'@gmail.com'\r",
+									"//let email_bk = {{FirstName}}{{LastName}}+num+'@email.com'\r",
+									"let email_bk = pm.globals.get(\"firstname\") + pm.globals.get(\"lastname\") + num + '@email.com';\r",
+									"pm.globals.set('email1',email)\r",
+									"//pm.globals.set('email1',email_bk)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"ECE\",\r\n  \"userEduUg\": \"string\",\r\n  \"userFirstName\": \"APIZilla\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"TeamFifteen\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Florida\",\r\n  \"userLogin\": {\r\n    \"loginStatus\": \"Active\",\r\n    \"password\": \"string\",\r\n    \"roleIds\": [\r\n      \"string\"\r\n    ],\r\n    \"status\": \"Active\",\r\n    \"userLoginEmail\": \"APIZi985@gmail.com\"\r\n  },\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\":3401091967,\r\n  \"userRoleMaps\": [\r\n    {\r\n      \"roleId\": \"R01\",\r\n      \"userRoleStatus\": \"Active\"\r\n    }\r\n  ],\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/roleStatus",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"roleStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by UserID  END-TO-END",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{Userid}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{Userid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Copy End-to-end",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userComments\": \"User Comments\",\r\n  \"userEduPg\": \"ECE\",\r\n  \"userEduUg\": \"B.Tech\",\r\n  \"userFirstName\": \"APIZilla\",\r\n  \"userId\": \"string\",\r\n  \"userLastName\": \"TeamFifteen\",\r\n  \"userLinkedinUrl\": \"https://www.linkedin.com\",\r\n  \"userLocation\": \"Florida\",\r\n  \"userLoginEmail\": \"APIZilla4@gmail.com\",\r\n  \"userMiddleName\": \"QA\",\r\n  \"userPhoneNumber\": 9878978967,\r\n  \"userTimeZone\": \"EST\",\r\n  \"userVisaStatus\": \"H4-EAD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/{{Userid}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{Userid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User end-to-end",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/{{Userid}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{Userid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User log out",
+			"item": [
+				{
+					"name": "User log out",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Bearer token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/logoutlms",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"logoutlms"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://lms-marchapi-hackathon-a258d2bbd43b.herokuapp.com/lms"
+		},
+		{
+			"key": "Userid",
+			"value": ""
+		},
+		{
+			"key": "Userfirstname",
+			"value": ""
+		}
+	]
+}
