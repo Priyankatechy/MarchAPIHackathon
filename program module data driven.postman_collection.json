@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "432ddf47-c2a5-409a-813d-4a41c245ce69",
+		"name": "Swathi api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33242028",
+		"_collection_link": "https://martian-eclipse-843837.postman.co/workspace/Team15~9793523c-4925-452f-bd26-8fc64e914372/collection/33242028-432ddf47-c2a5-409a-813d-4a41c245ce69?action=share&source=collection_link&creator=33242028"
+	},
+	"item": [
+		{
+			"name": "UserLoginController",
+			"item": [
+				{
+					"name": "userlogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userLoginEmailId\": \"sdetorganizers@gmail.com\",\r\n  \"password\": \"Numpyninja@1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DataDrivenTesting",
+			"item": [
+				{
+					"name": "csv file",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code is 201\", () => {\r",
+									"\r",
+									"pm.response.to.have.status(201);\r",
+									"});\r",
+									"var response=pm.response.json();\r",
+									"console.log(response);\r",
+									"pm.collectionVariables.set(\"pgmid\", response.programId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"programDescription\":\"{{ProgramName}}\",\r\n\"programName\":\"{{ProgramDescription}}\",\r\n\"programStatus\":\"{{ProgramStatus}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/saveprogram",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"saveprogram"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Jsonfile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"status code is 201\", () => {\r",
+									"\r",
+									"pm.response.to.have.status(201);\r",
+									"});\r",
+									"var response=pm.response.json();\r",
+									"console.log(response);\r",
+									"pm.collectionVariables.set(\"pgmid\", response.programId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"programDescription\":\"{{ProgramName}}\",\r\n\"programName\":\"{{ProgramDescription}}\",\r\n\"programStatus\":\"{{ProgramStatus}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/saveprogram",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"saveprogram"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Programid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/programs/{{pid}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"programs",
+								"{{pid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/deletebyprogid/{{pgmid}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"deletebyprogid",
+								"{{pgmid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token_variable}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "getallprograms",
+			"value": "/allPrograms",
+			"type": "string"
+		},
+		{
+			"key": "allProgramsWithUsers",
+			"value": "/allProgramsWithUsers",
+			"type": "string"
+		},
+		{
+			"key": "ProgrambyProgramId ",
+			"value": " /programs/{programId}",
+			"type": "string"
+		},
+		{
+			"key": "program_id",
+			"value": "16226",
+			"type": "string"
+		},
+		{
+			"key": "token_variable",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzZGV0b3JnYW5pemVyc0BnbWFpbC5jb20iLCJpYXQiOjE3MTAxNjcwMzEsImV4cCI6MTcxMDE5NTgzMX0.CTXCmKBLdkyUlc230qQAVN9XR6BPe3UUWBO2wkX_6y9wCTSQZRg32U6qJausQ2AMlSJDBvceu5bma1tnAyxWew",
+			"type": "string"
+		},
+		{
+			"key": "base_url",
+			"value": "https://lms-marchapi-hackathon-a258d2bbd43b.herokuapp.com/lms",
+			"type": "string"
+		},
+		{
+			"key": "pgmid",
+			"value": ""
+		}
+	]
+}
